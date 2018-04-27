@@ -1369,7 +1369,7 @@ async def regional(ctx, regional=None):
         await ctx.message.channel.send(_("Meowth! Regional raid boss set to **{boss}**!").format(boss=get_name(regional).title()))
     elif regional and not regional.isdigit() and regional.lower() in get_raidlist():
         await ctx.message.channel.send(_("Meowth! Regional raid boss set to **{boss}**!").format(boss=regional.title()))
-        regional = get_number(regional)
+        regional = get_number(regional.lower())
     else:
         await ctx.message.channel.send(_("Meowth! That Pokemon doesn't appear in raids!"))
         return
@@ -3212,7 +3212,7 @@ async def unwant(ctx,*,pokemon):
     guild = message.guild
     channel = message.channel
     if ctx.invoked_subcommand == None:
-        unwant_split = content.lower().split()
+        unwant_split = pokemon.lower().split()
         unwant_list = []
         if ',' in ''.join(unwant_split):
             for pkmn in ''.join(unwant_split).split(','):
@@ -3349,7 +3349,7 @@ async def _wild(message, content):
 
 @Meowth.command()
 @checks.allowraidreport()
-async def raid(ctx,pokemon,*,location:commands.clean_content, timer=None):
+async def raid(ctx,pokemon,*,location:commands.clean_content(fix_channel_mentions=True)="", timer=None):
     """Report an ongoing raid.
 
     Usage: !raid <species> <location> [minutes]
@@ -3520,7 +3520,7 @@ async def _raid(message, content):
 
 @Meowth.command()
 @checks.allowraidreport()
-async def raidegg(ctx,egglevel,*,location:commands.clean_content, timer=None):
+async def raidegg(ctx,egglevel,*,location:commands.clean_content(fix_channel_mentions=True)="", timer=None):
     """Report a raid egg.
 
     Usage: !raidegg <level> <location> [minutes]
