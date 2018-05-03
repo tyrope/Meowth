@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2018-03-11 02:35+0100\n"
-"PO-Revision-Date: 2018-04-27 20:10+0200\n"
+"PO-Revision-Date: 2018-05-03 13:09+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -837,7 +837,7 @@ msgstr "Het ingevoerde kanaal is geen raid kanaal."
 
 #: __main__.py:1757 __main__.py:2514
 msgid "level-{egg_level}-egg-"
-msgstr "lvl-{egg_level}-ei-"
+msgstr "ei-{egg_level}-"
 
 #: __main__.py:1774 __main__.py:1777 __main__.py:2521 __main__.py:2524
 #: __main__.py:2846 __main__.py:2849 __main__.py:4053 __main__.py:4056
@@ -2146,13 +2146,13 @@ msgstr "{member}s groep van {trainer_count} trainers zijn de raid uit gegaan!"
 
 #: __main__.py:4149
 msgid "Meowth! {member} is no longer on their way!"
-msgstr "{member} is niet meer onderweg!"
+msgstr "{member} heeft zich afgemeld!"
 
 #: __main__.py:4151
 msgid ""
 "Meowth! {member} and their total of {trainer_count} trainers are no longer "
 "on their way!"
-msgstr "{member}s groep van {trainer_count} trainers zijn niet meer onderweg!"
+msgstr "{member}s groep van {trainer_count} trainers hebben zich afgemeld!"
 
 #: __main__.py:4154
 msgid "Meowth! {member} has backed out of the lobby!"
@@ -2250,7 +2250,7 @@ msgid ""
 "    {interestcount} interested, {comingcount} coming, {herecount} here, "
 "{lobbycount} in the lobby.{start_str}\n"
 msgstr ""
-"    {interestcount} geinteresseerd, {comingcount} onderweg, {herecount} "
+"    {interestcount} geinteresseerd, {comingcount} aangemeld, {herecount} "
 "aanwezig, {lobbycount} in de lobby.{start_str}\n"
 
 #: __main__.py:4361
@@ -2315,7 +2315,7 @@ msgstr ""
 
 #: __main__.py:4478
 msgid " {trainer_count} on the way{including_string}!"
-msgstr " {trainer_count} onderweg{including_string}!"
+msgstr " {trainer_count} aangemeld{including_string}!"
 
 #: __main__.py:4511 __main__.py:4513
 msgid ""
@@ -2346,8 +2346,8 @@ msgid ""
 "{type}{name}: **{total} total,** {interested} interested, {coming} coming, "
 "{waiting} waiting{type}\n"
 msgstr ""
-"{type}{name}: **{total} totaal,** {interested} geinteresseerd, {coming} "
-"onderweg, {waiting} wachtende{type}\n"
+"{type}{name}: **{total} totaal,** {interested} geinteresseerd, {coming} , "
+"{waiting} wachtende{type}\n"
 
 #: __main__.py:4590
 msgid ""
@@ -2366,7 +2366,7 @@ msgid ""
 "{emoji} **{total} total,** {interested} interested, {coming} coming, "
 "{waiting} waiting {emoji}\n"
 msgstr ""
-"{emoji}: **{total} totaal,** {interested} geinteresseerd, {coming} onderweg, "
+"{emoji}: **{total} totaal,** {interested} geinteresseerd, {coming} , "
 "{waiting} wachtende{emoji}\n"
 
 #: __main__.py:4628
@@ -2374,7 +2374,7 @@ msgid ""
 "**{grey_number} total,** {greymaybe} interested, {greycoming} coming, "
 "{greywaiting} waiting"
 msgstr ""
-"**{grey_number} totaal,** {greymaybe} geinteresseerd, {greycoming} onderweg, "
+"**{grey_number} totaal,** {greymaybe} geinteresseerd, {greycoming} , "
 "{greywaiting} wachtende"
 
 #: __main__.py:4632
