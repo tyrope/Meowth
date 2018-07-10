@@ -1,7 +1,7 @@
 
 from discord.ext import commands
 import discord.utils
-import errors
+from meowth import errors
 
 def is_owner_check(ctx):
     author = ctx.author.id
@@ -25,7 +25,7 @@ def is_dev_or_owner():
     return commands.check(predicate)
 
 def check_permissions(ctx, perms):
-    if (not perms):
+    if not perms:
         return False
     ch = ctx.channel
     author = ctx.author
@@ -150,6 +150,8 @@ def check_meetupset(ctx):
     if ctx.guild is None:
         return False
     guild = ctx.guild
+    if not ctx.bot.guild_dict[guild.id]['configure_dict'].get('meetup'):
+        return False
     return ctx.bot.guild_dict[guild.id]['configure_dict']['meetup'].get('enabled',False)
 
 def check_meetupreport(ctx):
@@ -157,6 +159,8 @@ def check_meetupreport(ctx):
         return False
     channel = ctx.channel
     guild = ctx.guild
+    if not ctx.bot.guild_dict[guild.id]['configure_dict'].get('meetup'):
+        return False
     channel_list = [x for x in ctx.bot.guild_dict[guild.id]['configure_dict']['meetup'].get('report_channels',{}).keys()]
     return channel.id in channel_list
 
@@ -167,6 +171,20 @@ def check_meetupchannel(ctx):
     guild = ctx.guild
     meetup =  ctx.bot.guild_dict[guild.id].get('raidchannel_dict',{}).get(channel.id,{}).get('meetup',False)
     return meetup
+
+def check_tradeset(ctx):
+    if ctx.guild is None:
+        return False
+    guild = ctx.guild
+    return ctx.bot.guild_dict[guild.id]['configure_dict'].setdefault('trade', {}).get('enabled', False)
+
+def check_tradereport(ctx):
+    if ctx.guild is None:
+        return False
+    channel = ctx.channel
+    guild = ctx.guild
+    channel_list = [x for x in ctx.bot.guild_dict[guild.id]['configure_dict'].setdefault('trade', {}).get('report_channels',[])]
+    return channel.id in channel_list
 
 def check_wildset(ctx):
     if ctx.guild is None:
@@ -310,12 +328,21 @@ def allowwant():
     def predicate(ctx):
         if check_wantset(ctx):
             if check_wantchannel(ctx):
-                print(1)
                 return True
             else:
-                print(2)
                 raise errors.WantChannelCheckFail()
         raise errors.WantSetCheckFail()
+    return commands.check(predicate)
+
+def allowtrade():
+    def predicate(ctx):
+        if check_tradeset(ctx):
+            if check_tradereport(ctx):
+                return True
+            else:
+                raise errors.TradeChannelCheckFail()
+        else:
+            raise errors.TradeSetCheckFail()
     return commands.check(predicate)
 
 def allowarchive():
@@ -368,4 +395,15 @@ def activechannel():
             if check_raidactive(ctx):
                 return True
         raise errors.ActiveChannelCheckFail()
+    return commands.check(predicate)
+
+def feature_enabled(names, ensure_all=False):
+    def predicate(ctx):
+        cfg = ctx.bot.guild_dict[ctx.guild.id]['configure_dict']
+        enabled = [k for k, v in cfg.items() if v.get('enabled', False)]
+        if isinstance(names, list):
+            result = [n in enabled for n in names]
+            return all(*result) if ensure_all else any(*result)
+        if isinstance(names, str):
+            return names in enabled
     return commands.check(predicate)
